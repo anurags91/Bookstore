@@ -22,7 +22,7 @@ const RecentlyAdded = () => {
             <Loader />
           </div>
         )}
-        <div className="my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        <div className="my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {Data &&
             Data.map((items, i) => (
               <div key={i}>

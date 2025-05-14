@@ -8,6 +8,7 @@ function BookCart({ data, Favourite }) {
     authorization: `Bearer ${localStorage.getItem("token")}`,
     bookid: data._id,
   };
+
   const handleRemoveBook = async () => {
     const response = await axios.put(
       "http://localhost:1000/api/v1/remove-book-from-favourite",
@@ -16,24 +17,28 @@ function BookCart({ data, Favourite }) {
     );
     alert(response.data.message);
   };
+
   return (
-    <div className="bg-gray-300 rounded p-4 flex flex-col">
+    <div className="bg-gray-100 rounded p-4 flex flex-col w-[180px] h-[300px] ">
       <Link to={`/view-book-detail/${data._id}`}>
-        <div className="  ">
-          <div className="bg-gray-100 rounded flex item-center justify-center">
-            <img src={data.url} alt="/" className="h-[25vh]" />
-          </div>
-          <h2 className="mt-4 text-xl font-semibold">{data.title}</h2>
-          <p className="mt-2 ">by {data.author}</p>
-          <p className="mt-2 text-xl font-semibold">₹{data.price}</p>
+        <div className="w-full h-[170px] bg-gray-100 rounded flex items-center justify-center overflow-hidden">
+          <img
+            src={data.url}
+            alt={data.title}
+            className="object-contain h-full w-full"
+          />
         </div>
+        <h2 className="mt-3 text-lg font-semibold truncate">{data.title}</h2>
+        <p className="mt-1 text-sm text-gray-700 truncate">by {data.author}</p>
+        <p className="mt-2 text-lg font-semibold text-black">₹{data.price}</p>
       </Link>
+
       {Favourite && (
         <button
-          className="bg-gray-100 px-4 py-2 rounded border border-black-300 text-black  mt-4 cursor-pointer hover:bg-gray-300 font-semibold"
+          className="bg-white px-3 py-2 rounded border mt-4 text-black hover:bg-gray-200 font-medium"
           onClick={handleRemoveBook}
         >
-          Remove from favourite
+          Remove from Favourite
         </button>
       )}
     </div>
