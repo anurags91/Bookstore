@@ -58,8 +58,8 @@ const ViewBookDetails = () => {
   return (
     <>
       {Data && (
-        <div className="px-4 md:px-12 py-8 flex flex-col lg:flex-row gap-8">
-          <div className="w-full lg:w-2/6">
+        <div className="px-4  md:px-12 py-8 flex flex-col lg:flex-row gap-8 items-start">
+          <div className="w-full lg:w-3/6  p-4">
             {/* Make flex-col on mobile so image is above icons */}
             <div className="flex flex-col lg:flex-row items-center p-4 rounded gap-4">
               <img

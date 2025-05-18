@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { MdDelete } from "react-icons/md";
 function BookCart({ data, Favourite }) {
   const headers = {
     id: localStorage.getItem("id"),
@@ -28,17 +28,17 @@ function BookCart({ data, Favourite }) {
             className="object-contain h-full w-full"
           />
         </div>
-        <h2 className="mt-3 text-lg font-semibold truncate">{data.title}</h2>
+        <h3 className="mt-2 text-lg font-semibold truncate">{data.title}</h3>
         <p className="mt-1 text-sm text-gray-700 truncate">by {data.author}</p>
-        <p className="mt-2 text-lg font-semibold text-black">₹{data.price}</p>
+        <p className="mt-1 text-lg font-semibold text-black">₹{data.price}</p>
       </Link>
 
       {Favourite && (
         <button
-          className="bg-white px-3 py-2 rounded border mt-4 text-black hover:bg-gray-200 font-medium"
+          className="text-2xl text-red-600 ml-auto cursor-pointer mb-2"
           onClick={handleRemoveBook}
         >
-          Remove from Favourite
+          <MdDelete />
         </button>
       )}
     </div>
