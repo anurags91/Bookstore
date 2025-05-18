@@ -49,7 +49,7 @@ const ViewBookDetails = () => {
   };
   const deleteBook = async () => {
     const response = await axios.delete(
-      "http://localhost:1000/api/v1/delete-book",
+      "https://bookstore-z1t8.onrender.com/api/v1/delete-book",
       { headers }
     );
     alert(response.data.message);
