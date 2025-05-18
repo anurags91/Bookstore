@@ -15,14 +15,18 @@ const RecentlyAdded = () => {
   }, []);
   return (
     <>
-      <div className="mt-8 px-4">
-        <h4 className="text-3xl text-yellow-500">Recently Added Books</h4>
+      <div className="mt-8 px-4 sm:px-6 lg:px-8">
+        <h4 className="text-2xl sm:text-3xl text-yellow-500 text-center sm:text-left">
+          Recently Added Books
+        </h4>
+
         {!Data && (
           <div className="flex items-center justify-center my-8">
             <Loader />
           </div>
         )}
-        <div className="my-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+        <div className="my-8 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {Data &&
             Data.map((items, i) => (
               <div key={i}>
