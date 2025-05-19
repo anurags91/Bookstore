@@ -45,7 +45,7 @@ const Cart = () => {
   const PlaceOrder = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:1000/api/v1/place-order`,
+        `https://bookstore-z1t8.onrender.com/api/v1/place-order`,
         {
           id: localStorage.getItem("id"),
           order: cart,
