@@ -41,7 +41,7 @@ const AllOrders = () => {
     const id = allOrders[i]._id;
 
     const response = await axios.put(
-      `http://localhost:1000/api/v1/update-status/${id}`,
+      `https://bookstore-z1t8.onrender.com/api/v1/update-status/${id}`,
       Values,
       { headers }
     );
