@@ -20,7 +20,7 @@ const AllOrders = () => {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:1000/api/v1/get-all-orders",
+          "https://bookstore-z1t8.onrender.com/api/v1/get-all-orders",
           { headers }
         );
         console.log("Fetched Orders:", response.data.data);
