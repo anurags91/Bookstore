@@ -26,7 +26,7 @@ router.post("/add-book",authenticationToken,async(req,res)=>{
     }
     catch(error)
     {
-        // console.error("Add Book Error:", error);
+        console.error("Error while adding book:", error); // log real error
         res.status(500).json({message:"Internal server error"});
     }
     
@@ -83,7 +83,7 @@ router.get("/get-all-book",async(req,res)=>{
 //get recently addedd books limit 4
 router.get("/get-recent-books",async(req,res)=>{
     try {
-        const books = await Book.find().sort({created:-1}).limit(4);
+        const books = await Book.find().sort({created:-1}).limit(6);
         return res.json({
             status:"Success",
             data:books,

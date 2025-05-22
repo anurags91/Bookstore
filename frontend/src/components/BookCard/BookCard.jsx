@@ -11,7 +11,7 @@ function BookCart({ data, Favourite }) {
 
   const handleRemoveBook = async () => {
     const response = await axios.put(
-      "https://bookstore-z1t8.onrender.com/api/v1/remove-book-from-favourite",
+      "http://localhost:1000/api/v1/remove-book-from-favourite",
       {},
       { headers }
     );

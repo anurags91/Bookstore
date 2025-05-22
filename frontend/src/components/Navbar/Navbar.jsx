@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaGripLines } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi";
+import { IoBookSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 const Navbar = () => {
   const links = [
@@ -44,14 +45,11 @@ const Navbar = () => {
   return (
     <>
       <nav className="z-50 relative flex bg-yellow-500 text-white px-8 py-4  justify-between">
-        <Link to="/" className="flex items-center">
-          <img
-            className="h-10 me-4 "
-            src="https://cdn-icons-png.flaticon.com/512/5402/5402751.png"
-            alt="logo"
-          />
-          <h1 className="text-2xl font-semibold ">BookHeaven</h1>
+        <Link to="/" className="flex items-center space-x-2">
+          <IoBookSharp className="text-2xl mt-1" />
+          <h1 className="text-2xl font-semibold font-mono">BookHeaven</h1>
         </Link>
+
         <div className="nav-link-bookheaven block md:flex items-center gap-4 font-semibold">
           <div className=" hidden md:flex gap-4">
             {links.map((items, i) => (
@@ -97,14 +95,14 @@ const Navbar = () => {
           </div>
 
           <button
-            className="block md:hidden text-white text-2xl hover:text-black"
+            className="block md:hidden text-white text-2xl hover:text-black mt-2"
             onClick={() =>
               MobileNav === "hidden"
                 ? setMobileNav("block")
                 : setMobileNav("hidden")
             }
           >
-            <FaGripLines />
+            <FiMenu />
           </button>
         </div>
       </nav>

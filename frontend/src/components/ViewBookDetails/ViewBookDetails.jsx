@@ -20,7 +20,7 @@ const ViewBookDetails = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        `https://bookstore-z1t8.onrender.com/api/v1/get-book-by-id/${id}`
+        `http://localhost:1000/api/v1/get-book-by-id/${id}`
       );
       setData(response.data.data);
     };

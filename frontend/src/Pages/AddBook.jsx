@@ -17,10 +17,35 @@ const AddBook = () => {
     const { name, value } = e.target;
     setData({ ...Data, [name]: value });
   };
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "BookImage");
+    formData.append("cloud_name", "dnu1tzc7e");
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dnu1tzc7e/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+      console.log(data);
+      setData({ ...Data, url: data.secure_url });
+    } catch (err) {
+      console.error("Image Upload Error:", err);
+      alert("Failed to upload image.");
+    }
+  };
+
   const submit = async () => {
     try {
       if (
-        Data.url === "" ||
+        Data.image === "" ||
         Data.title === "" ||
         Data.author === "" ||
         Data.price === "" ||
@@ -30,10 +55,12 @@ const AddBook = () => {
         alert("All fields are required");
       } else {
         const response = await axios.post(
-          "https://bookstore-z1t8.onrender.com/api/v1/add-book",
+          "http://localhost:1000/api/v1/add-book",
           Data,
+
           { headers }
         );
+
         setData({
           url: "",
           title: "",
@@ -42,6 +69,7 @@ const AddBook = () => {
           desc: "",
           language: "",
         });
+
         alert(response.data.message);
       }
     } catch (error) {
@@ -57,14 +85,24 @@ const AddBook = () => {
             Image
           </label>
           <input
-            type="text"
+            type="file"
             className="w-full mt-2 bg-gray-100 p-2 outline-none"
-            placeholder="URL of the image"
+            placeholder="upload the image"
             name="url"
+            accept="image/*"
             required
-            value={Data.url}
-            onChange={change}
+            onChange={handleImageUpload}
           />
+          {Data.url && (
+            <div className="mt-4">
+              <p className="text-sm text-gray-700">Image Preview:</p>
+              <img
+                src={Data.url}
+                alt="Uploaded"
+                className="mt-2 w-64 h-64 object-cover rounded border"
+              />
+            </div>
+          )}
         </div>
         <div className="mt-4">
           <label htmlFor="" className="">
@@ -86,7 +124,7 @@ const AddBook = () => {
           </label>
           <input
             type="text"
-            className="w-full mt-2 p-2  bg-gray-100  p-2 outline-none"
+            className="w-full mt-2 p-2  bg-gray-100 outline-none"
             placeholder="Author of the image"
             name="author"
             required
@@ -148,5 +186,4 @@ const AddBook = () => {
     </div>
   );
 };
-
 export default AddBook;

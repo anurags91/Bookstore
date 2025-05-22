@@ -24,7 +24,7 @@ function Signup() {
         alert("All fields are required");
       } else {
         const response = await axois.post(
-          "https://bookstore-z1t8.onrender.com/api/v1/sign-up",
+          "http://localhost:1000/api/v1/sign-up",
           Values
         );
         alert(response.data.message);
