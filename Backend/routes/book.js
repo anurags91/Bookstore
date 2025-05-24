@@ -83,7 +83,7 @@ router.get("/get-all-book",async(req,res)=>{
 //get recently addedd books limit 4
 router.get("/get-recent-books",async(req,res)=>{
     try {
-        const books = await Book.find().sort({created:-1}).limit(6);
+        const books = await Book.find().sort({created:-1}).limit(4);
         return res.json({
             status:"Success",
             data:books,

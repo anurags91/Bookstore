@@ -34,10 +34,10 @@ const AddBook = () => {
       );
 
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setData({ ...Data, url: data.secure_url });
     } catch (err) {
-      console.error("Image Upload Error:", err);
+      // console.error("Image Upload Error:", err);
       alert("Failed to upload image.");
     }
   };
@@ -55,7 +55,7 @@ const AddBook = () => {
         alert("All fields are required");
       } else {
         const response = await axios.post(
-          "http://localhost:1000/api/v1/add-book",
+          "https://bookstore-z1t8.onrender.com/api/v1/add-book",
           Data,
 
           { headers }

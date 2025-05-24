@@ -17,7 +17,7 @@ const Cart = () => {
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
-        "http://localhost:1000/api/v1/get-user-cart",
+        "https://bookstore-z1t8.onrender.com/api/v1/get-user-cart",
         { headers }
       );
       setCart(res.data.data);
@@ -26,7 +26,7 @@ const Cart = () => {
   }, [cart]);
   const deleteItem = async (bookid) => {
     const response = await axios.put(
-      `http://localhost:1000/api/v1/remove-from-cart/${bookid}`,
+      `https://bookstore-z1t8.onrender.com/api/v1/remove-from-cart/${bookid}`,
       {},
       { headers }
     );
