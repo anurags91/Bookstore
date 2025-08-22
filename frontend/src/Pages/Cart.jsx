@@ -139,7 +139,7 @@ const Cart = () => {
                 onClick={PlaceOrder}
               >
                 {" "}
-                Place a Order
+                 Order and pay
               </button>
             </div>
           </div>

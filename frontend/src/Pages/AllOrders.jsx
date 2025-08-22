@@ -6,12 +6,19 @@ import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { IoOpenOutline } from "react-icons/io5";
 import SeeUserData from "./SeeUserData";
+
+
 const AllOrders = () => {
   const [allOrders, setAllOrders] = useState();
   const [Options, setOptions] = useState(-1);
   const [Values, setValues] = useState({ status: "" });
   const [userDiv, setuserDiv] = useState();
   const [userDivData, setUserDivData] = useState();
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 5;
+
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -20,17 +27,18 @@ const AllOrders = () => {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "https://bookstore-z1t8.onrender.com/api/v1/get-all-orders",
+          `https://bookstore-z1t8.onrender.com/api/v1/get-all-orders?page=${page}&limit=5`,
           { headers }
         );
-        console.log("Fetched Orders:", response.data.data);
+        // console.log("Fetched Orders:", response.data.data);
         setAllOrders(response.data.data);
+        setTotalPages(response.data.pagination.totalPages);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
     };
     fetch();
-  }, []);
+  }, [page]);
 
   const change = (e) => {
     const { value } = e.target;
@@ -90,7 +98,9 @@ const AllOrders = () => {
               key={i}
               className="w-full rounded py-2 px-4 flex gap-2 hover:bg-gray-200 hover:cursor-pointer transition-all duration-300"
             >
-              <div className="w-[3%] text-center">{i + 1}</div>
+              <div className="w-[3%] text-center">
+               {(page - 1) * limit + (i + 1)}
+              </div>
 
               <div className="w-[40%] md:w-[22%] text-center">
                 <Link
@@ -165,6 +175,26 @@ const AllOrders = () => {
               </div>
             </div>
           ))}
+          {/* Pagination Controls */}
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <button
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+              className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <span>
+              Page {page} of {totalPages}
+            </span>
+            <button
+              disabled={page === totalPages}
+              onClick={() => setPage(page + 1)}
+              className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
         </div>
       )}
       {userDivData && (
