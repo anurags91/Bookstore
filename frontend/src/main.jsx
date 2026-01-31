@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
@@ -11,7 +12,18 @@ createRoot(document.getElementById("root")).render(
     <Router>
       <Provider store={store}>
         <App />
+        <Toaster
+          position="center-top"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 3000,
+            style: {
+              fontWeight: "500",
+              marginTop: "100px",
+            },
+          }}
+        />
       </Provider>
     </Router>
-  </StrictMode>
+  </StrictMode>,
 );

@@ -16,6 +16,7 @@ const ViewBookDetails = () => {
   const [Data, setData] = useState();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const role = useSelector((state) => state.auth.role);
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -32,12 +33,18 @@ const ViewBookDetails = () => {
     bookid: id,
   };
   const handleFavourite = async () => {
-    const response = await axios.put(
-      "https://bookstore-z1t8.onrender.com/api/v1/add-book-to-favourite",
-      {},
-      { headers }
-    );
-    alert(response.data.message);
+    try {
+      const response = await axios.put(
+        "https://bookstore-z1t8.onrender.com/api/v1/add-book-to-favourite",
+        {},
+        { headers }
+      );
+      alert(response.data.message);
+      setIsFavourite((prev) => !prev);
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong while adding to favourites.");
+    }
   };
   const handleCart = async () => {
     const response = await axios.put(
@@ -60,7 +67,6 @@ const ViewBookDetails = () => {
       {Data && (
         <div className="px-4  md:px-12 py-8 flex flex-col lg:flex-row gap-8 items-start">
           <div className="w-full lg:w-3/6  p-4">
-            {/* Make flex-col on mobile so image is above icons */}
             <div className="flex flex-col lg:flex-row items-center p-4 rounded gap-4">
               <img
                 src={Data.url}
@@ -70,10 +76,12 @@ const ViewBookDetails = () => {
               {isLoggedIn === true && role === "user" && (
                 <div className="flex flex-col md:flex-row lg:flex-col gap-4 mt-4 lg:mt-0">
                   <button
-                    className="bg-white rounded-full text-3xl p-2 text-red-500 flex items-center justify-center cursor-pointer"
+                    className="bg-white rounded-full text-3xl p-2 flex items-center justify-center cursor-pointer"
                     onClick={handleFavourite}
                   >
-                    <FaHeart />{" "}
+                    <FaHeart
+                      className={isFavourite ? "text-red-600" : "text-gray-400"}
+                    />
                     <span className="ms-4-block lg:hidden px-2">
                       Favourites
                     </span>

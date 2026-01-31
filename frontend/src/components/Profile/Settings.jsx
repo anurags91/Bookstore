@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../Loader/Loader";
+
 const Settings = () => {
   const [Value, setValue] = useState({ address: "" });
   const [ProfileData, setProfileData] = useState();

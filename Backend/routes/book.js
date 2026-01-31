@@ -74,7 +74,7 @@ router.get("/get-all-book", async (req, res) => {
         // console.log("Page:", page, "Limit:", limit, "Skip:", skip);  // 🟢 Debug line
         const search = req.query.search || "";
 
-        // 🟢 Create filter for searching by title or author
+        // Create filter for searching by title or author
         const filter = search
             ? {
                 $or: [
@@ -106,10 +106,10 @@ router.get("/get-all-book", async (req, res) => {
     }
 })
 
-//get recently addedd books limit 4
+//get recently addedd books limit 6
 router.get("/get-recent-books", async (req, res) => {
     try {
-        const books = await Book.find().sort({ created: -1 }).limit(4);
+        const books = await Book.find().sort({ created: -1 }).limit(6);
         return res.json({
             status: "Success",
             data: books,
@@ -128,6 +128,7 @@ router.get("/get-book-by-id/:id", async (req, res) => {
             status: "Success",
             data: book,
         })
+        
     } catch (error) {
         return res.status(500).json({ message: "An error ocuured" });
     }

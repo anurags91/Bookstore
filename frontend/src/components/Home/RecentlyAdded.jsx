@@ -7,9 +7,10 @@ const RecentlyAdded = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "https://bookstore-z1t8.onrender.com/api/v1/get-recent-books"
+        "https://bookstore-z1t8.onrender.com/api/v1/get-recent-books",
       );
       setData(response.data.data);
+      console.log(response.data);
     };
     fetch();
   }, []);
@@ -26,7 +27,7 @@ const RecentlyAdded = () => {
           </div>
         )}
 
-        <div className="my-8 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="my-4 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center justify-center gap-4 ">
           {Data &&
             Data.map((items, i) => (
               <div key={i}>
